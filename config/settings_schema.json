@@ -1,0 +1,160 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "feedback_survey",
+    "theme_label": "t:theme_label",
+    "theme_description": "t:theme_description",
+    "theme_version": "1.0.0",
+    "theme_scope": "community",
+    "theme_author": "Baklib",
+    "theme_documentation_url": "https://help.baklib.cn/themes/community/feedback_survey",
+    "theme_support_url": "https://help.baklib.cn/themes/community/feedback_survey",
+    "theme_thumb_url": "images/theme/thumb.png",
+    "theme_preview_images": [
+      "images/theme/index.png",
+      "images/theme/page.png",
+      "images/theme/post.png",
+      "images/theme/roadmap.png",
+      "images/theme/activity.png"
+    ],
+    "theme_languages": [
+      {
+        "name": "中文简体",
+        "value": "zh-CN"
+      },
+      {
+        "name": "English",
+        "value": "en-US"
+      }
+    ],
+    "recommendations": {
+      "color_schemas": {
+        "fashion": {
+          "name": "时尚",
+          "colors": {
+            "--theme-color-primary": "#3D50E0",
+            "--theme-color-secondary": "#E91E63",
+            "--theme-color-accent": "#AAAAAA",
+            "--theme-color-info": "#2196F3",
+            "--theme-color-success": "#4CAF50",
+            "--theme-color-warning": "#FFC107"
+          }
+        },
+        "old_school": {
+          "name": "复古",
+          "colors": {
+            "--theme-color-primary": "#9C27B0",
+            "--theme-color-secondary": "#673AB7",
+            "--theme-color-accent": "#AAAAAA",
+            "--theme-color-info": "#418CC8",
+            "--theme-color-success": "#29B52F",
+            "--theme-color-warning": "#FFC107"
+          }
+        }
+      },
+      "initial_pages": {
+        "default": {
+          "name": "Question Community",
+          "default": false,
+          "pages": [
+            {
+              "name": "这是我的第1篇帖子",
+              "slug": "post1",
+              "template": "page",
+              "settings":
+              {
+                "content": "这是我的第1篇帖子内容",
+                "pinned": false
+              }
+            },
+            {
+              "name": "这是我的第2篇帖子",
+              "slug": "post2",
+              "template": "page",
+              "settings":
+              {
+                "content": "这是我的第1篇帖子内容",
+                "pinned": false
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "t:settings_schema.generic.name",
+    "settings": [
+      {
+        "id": "logo_url",
+        "type": "image_picker",
+        "ratio": "3:1",
+        "width": 150,
+        "label": "站点LOGO",
+        "info": "用在站点顶部的 LOGO"
+      },
+      {
+        "id": "is_allow_published",
+        "type": "checkbox",
+        "label": "是否开启先发后审",
+        "info": "先发后审：前台提交即发布；先审后发：前台提交，后台审核后发布。",
+        "default": false
+      },
+      {
+        "id": "feedback_useful_type",
+        "type": "text",
+        "label": "首选反馈表情",
+        "placeholder": "在'应用设置'->'反馈设置'中复制过来",
+        "default": "😊"
+      },
+      {
+        "id": "copyright_info",
+        "type": "text",
+        "label": "版权信息",
+        "placeholder": "中站点页脚显示"
+      },
+      {
+      "id": "changelog_path",
+      "type": "text",
+      "label": "changelog链接"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.generic.header_name",
+    "settings": [
+      {
+        "id": "header_menu_html",
+        "type": "html",
+        "label": "t:settings_schema.generic.settings.header_menu_html.label",
+        "info": "t:settings_schema.generic.settings.header_menu_html.info",
+        "rows": 10,
+        "default": "<a class='underline text-slate-500 hover:no-underline' href='#0'>About</a>",
+        "placeholder": "<a class='underline text-slate-500 hover:no-underline' href='#0'>About</a>"
+      },
+      {
+        "id": "footer_menu_html",
+        "type": "html",
+        "label": "t:settings_schema.generic.settings.footer_menu_html.label",
+        "info": "t:settings_schema.generic.settings.footer_menu_html.info",
+        "rows": 10,
+        "default": "<li><a class='underline text-slate-500 hover:no-underline' href='#0'>About</a></li>",
+        "placeholder": "<li><a class='underline text-slate-500 hover:no-underline' href='#0'>About</a></li>"
+      }
+    ]
+  },
+  {
+    "name": "t:settings_schema.generic.head_title",
+    "settings": [
+      {
+        "id": "head_html",
+        "type": "html",
+        "label": "t:settings_schema.generic.settings.head_html.label",
+        "info": "t:settings_schema.generic.settings.head_html.info",
+        "rows": 10,
+        "placeholder": "t:settings_schema.generic.settings.head_html.placeholder"
+      }
+    ]
+  }
+]
+
