@@ -1,29 +1,43 @@
 {% assign title = 'buttons.create_post' | t %}
 {% set_meta_title title %}
 
-<div class="overflow-hidden relative min-h-screen" >
-  <div class="flex items-start min-h-screen sm:justify-center sm:pt-12 xl:pt-24" >
-    <div
-      class="absolute inset-0 bg-opacity-40 backdrop-filter backdrop-blur-sm main-transition dark:bg-opacity-40 bg-gray-900/20 dark:bg-gray-900"
-      id="headlessui-dialog-overlay-:rib:"></div>
-    <div class="hidden sm:block">
-      <div
-        class="absolute top-1 right-1 p-1.5 rounded-lg border shadow-none cursor-pointer md:right-4 md:top-4 dropdown-background bg-white/40 hover:bg-white dark:bg-border/30 dark:hover:bg-border/70 main-transition"
-        data-action="click->dialog-fetch#closeDialog" tabindex="-1" aria-hidden="true"><svg
-          xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          class="w-6 h-6 secondary-svg">
-          <path d="M18 6 6 18"></path>
-          <path d="m6 6 12 12"></path>
-        </svg></div>
-    </div>
-    <div
-      class="relative z-50 mx-4 my-10 w-full max-w-2xl bg-white rounded-lg shadow-2xl opacity-100 transition-transform ease-in-out transform scale-100 dropdown-background dark:shadow-2xl 2xl:mx-0 sm:mx-8" id="page_form">
-      <div class="mx-auto min-w-0 max-w-7xl" x-data="{ status: 'inbox', board: 'feature_request', board_name: '💡 功能需求' }">
-        {% form_tag 'page' %}
-          {% render 'page_form', page: page,  action: 'create' %}
-        {% endform_tag %}
+{% if current_user %}
+  <div class="min-h-screen bg-base-200">
+    <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-10">
+      <nav class="mb-6">
+        <a href="/" class="btn btn-ghost btn-sm gap-2 font-medium text-base-content/70 hover:text-base-content">
+          {% render 'icon', name: 'arrow-left', class: 'w-4 h-4' %}
+          {{ 'generic.back' | t }}
+        </a>
+      </nav>
+
+      <div class="mx-auto w-full max-w-2xl">
+        {% render 'section_hero', title: title, class: 'mb-6 max-w-none' %}
+
+        <div
+          class="overflow-hidden rounded-2xl border border-base-300 bg-base-100 shadow-sm"
+          id="page_form"
+          x-data="{ status: 'inbox', board: 'feature_request', board_name: {{ 'roadmap.board.feature_request' | t | json }}, icon: 'message-square' }"
+        >
+          {% form_tag 'page' %}
+            {% render 'page_form', page: page, action: 'create' %}
+          {% endform_tag %}
+        </div>
       </div>
     </div>
   </div>
-</div>
+{% else %}
+  <div class="mx-auto w-2/3 min-h-fit max-w-7xl px-4 sm:px-6">
+    {{ 'buttons.redirect_to' | t }}
+    {% form_tag 'sign_in_with_baklib' %}
+      <input value="true" type="hidden" name="sign_up">
+      <input
+        type="submit"
+        value="{{ 'buttons.login' | t }}"
+        class="btn btn-primary items-center hidden px-3 py-2 text-sm font-medium lg:px-5"
+        data-disable-with="..."
+        x-init="$el.click()"
+      >
+    {% endform_tag %}
+  </div>
+{% endif %}

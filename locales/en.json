@@ -1,9 +1,37 @@
 {
-  "theme_label": "Question Community",
-  "theme_description": "A lightweight Q&A management system designed for creating and managing question-and-answer content such as FAQs, troubleshooting guides, knowledge base articles, user support threads, and more.",
+  "theme_label": "Product Roadmap & Feedback",
+  "theme_description": "An enterprise tool for publishing product roadmaps online and collecting user feedback. Share feature plans, track progress across roadmap stages, gather suggestions and votes, and prioritize what to build next.",
+  "nav": {
+    "feedback": "Feedback",
+    "roadmap": "Roadmap",
+    "changelog": "Changelog"
+  },
+  "home": {
+    "sort_top": "Top",
+    "sort_new": "New",
+    "sort_trending": "Trending",
+    "your_posts": "Your posts",
+    "view_all_activity": "View all your activity",
+    "no_posts_yet": "You haven't posted yet",
+    "boards": "Boards",
+    "view_all_posts": "All posts",
+    "most_helpful": "Most helpful"
+  },
   "generic": {
     "search": "Search",
-    "search_from": "Searching...",
+    "filter": "Filter",
+    "status": "Status",
+    "board": "Board",
+    "all_statuses": "All statuses",
+    "all_boards": "All boards",
+    "more": "Load more",
+    "contributors": "Top contributors",
+    "similar": "Similar posts",
+    "by_popularity": "By popularity",
+    "votes": "Votes",
+    "status_label": "Status",
+    "time": "Time",
+    "author": "Author",
     "all": "All",
     "popular": "Popular",
     "popular_reply": "Popular Comments",
@@ -26,9 +54,10 @@
     "navigation": "Navigation",
     "tags": "Tags",
     "recommend": "Recommend",
-    "under_review": "The content is under review, will not be displayed to the public",
-    "under_comment": "You need to log in to comment",
-    "empty": "Content is Empty",
+    "under_review": "This content is under review and is not visible to the public",
+    "under_comment": "Sign in to join the discussion",
+    "empty": "No content yet",
+    "pinned": "Pinned",
     "articles": "articles",
     "feeds": "Feeds",
     "read_more": "Read more",
@@ -36,36 +65,154 @@
     "403": "403 No access permission",
     "copyright": "All rights reserved",
     "news_letter": "Join the community and participate in the discussion",
-    "terms1": "The submitted content needs to be reviewed by the backend administrator before it can be displayed on the front end.",
+    "terms1": "Submitted content must be reviewed by an administrator before it appears publicly.",
     "terms2": "Platform users must comply with relevant statements and terms: "
   },
   "placeholders": {
-    "search": "Searching...",
+    "search": "Search…",
+    "reply": "Write a reply…",
     "input_feedback": "Send us your feedback",
     "input_password": "Please input your password"
   },
   "buttons": {
-    "login": "Login",
-    "logout": "Logout",
-    "create_post": "Create Post",
-    "edit_post": "Edit Post",
+    "login": "Sign in",
+    "logout": "Sign out",
+    "create_post": "Create post",
+    "edit_post": "Edit post",
     "submit": "Submit",
     "edit": "Edit",
-    "delete": "delete",
+    "delete": "Delete",
     "cancel": "Cancel",
-    "join": "Join Community",
+    "join": "Join community",
     "sso_login": "SSO Login",
     "baklib_login": "Baklib Account Login",
-    "redirect_to": "Not logged in, Redirect to the login page"
+    "redirect_to": "Not signed in — redirecting to login",
+    "comment": "Comment"
+  },
+  "profile": {
+    "activity": "Activity",
+    "posts": "Posts",
+    "replies": "Replies",
+    "replied_to_you": "replied to your comment on",
+    "commented_on": "commented on"
+  },
+  "roadmap": {
+    "status": {
+      "inbox": "Inbox",
+      "planned": "Planned",
+      "in_progress": "In progress",
+      "completed": "Completed"
+    },
+    "board": {
+      "feature_request": "Feature request",
+      "bug": "Bug report",
+      "task": "Improvement",
+      "question": "Question"
+    }
+  },
+  "form": {
+    "board_label": "Board",
+    "title_label": "Title",
+    "title_placeholder": "Describe your idea in one sentence",
+    "status_draft": "Draft review",
+    "submit_post": "Submit post",
+    "disclaimer": "By submitting, you agree that your post may be visible to other users after review."
+  },
+  "toast": {
+    "create_failed": "Could not create — please try again",
+    "login_to_comment": "Sign in to comment",
+    "reply_published": "Your reply has been published"
   },
   "paginate": {
-    "showing": "currently showing",
-    "total": "total",
+    "showing": "Showing",
+    "total": "of",
     "records": "records",
-    "previous": "Previous Page",
-    "next": "Next Page"
+    "previous": "Previous",
+    "next": "Next"
   },
   "prompts": {
-    "page_restricted": "This page can only be accessed with authentication"
+    "page_restricted": "This page requires authentication"
+  },
+  "schema": {
+    "recommendations": {
+      "baklib": { "name": "Baklib" },
+      "fashion": { "name": "Fashion" },
+      "old_school": { "name": "Retro" }
+    },
+    "lucide_icons": {
+      "name": "Lucide icons",
+      "settings": {
+        "lucide_icons": {
+          "label": "Allowed Lucide icon names",
+          "info": "One icon name per line. Used by the Lucide icon initializer in main.js."
+        }
+      }
+    },
+    "templates": {
+      "index": {
+        "settings": {
+          "slogan": { "label": "Site tagline" },
+          "description": { "label": "Welcome message" }
+        }
+      },
+      "roadmap": {
+        "settings": {
+          "title": { "label": "Roadmap page title" }
+        }
+      },
+      "page": {
+        "settings": {
+          "icon": {
+            "label": "Page icon",
+            "info": "Lucide icon shown in lists and detail views. Options come from site settings → Lucide icons."
+          },
+          "pinned": {
+            "label": "Pinned",
+            "info": "Pinned posts appear at the top of the list"
+          }
+        }
+      }
+    }
+  },
+  "settings_schema": {
+    "generic": {
+      "name": "General",
+      "header_name": "Header & footer menus",
+      "head_title": "Custom head HTML",
+      "settings": {
+        "logo_url": {
+          "label": "Site logo",
+          "info": "Displayed in the site header"
+        },
+        "is_allow_published": {
+          "label": "Publish before review",
+          "info": "When enabled, submissions go live immediately; otherwise they require admin approval."
+        },
+        "feedback_useful_type": {
+          "label": "Default feedback emoji",
+          "placeholder": "Copy from App settings → Feedback"
+        },
+        "copyright_info": {
+          "label": "Copyright / legal notice",
+          "placeholder": "Shown in the site footer"
+        },
+        "changelog_path": {
+          "label": "Changelog URL"
+        },
+        "header_menu_html": {
+          "label": "Header menu HTML",
+          "info": "Additional links rendered in the header area"
+        },
+        "footer_menu_html": {
+          "label": "Footer menu HTML",
+          "info": "List items rendered in the footer"
+        },
+        "head_html": {
+          "label": "Head HTML",
+          "info": "Injected before </head> on every page",
+          "placeholder": "<script>...</script>"
+        }
+      }
+    }
   }
 }

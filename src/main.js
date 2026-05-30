@@ -1,4 +1,5 @@
 import * as Turbo from "@hotwired/turbo"
+import { initLucideIcons } from './lucide_icons'
 import Alpine from 'alpinejs'
 import collapse from '@alpinejs/collapse'
 import { Application } from "@hotwired/stimulus"
@@ -41,6 +42,14 @@ document.addEventListener('alpine:init', () => {
 })
 Alpine.magic("dispatchTo", () => dispatchTo);
 Alpine.start()
+
+document.addEventListener('turbo:load', initLucideIcons)
+document.addEventListener('turbo:frame-render', initLucideIcons)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initLucideIcons)
+} else {
+  initLucideIcons()
+}
 
 const application = Application.start()
 window.Stimulus = application

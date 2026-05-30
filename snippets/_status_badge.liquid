@@ -1,0 +1,24 @@
+{% comment %}
+  Status pill for feedback cards and sidebar.
+  @param status {String} inbox | planned | in_progress | completed
+  @param class {String} optional extra classes
+{% endcomment %}
+{% assign page_status = status | default: 'inbox' %}
+{% case page_status %}
+{% when 'inbox' %}
+  {% assign status_label = 'roadmap.status.inbox' | t %}
+  {% assign status_badge_class = 'badge-neutral' %}
+{% when 'planned' %}
+  {% assign status_label = 'roadmap.status.planned' | t %}
+  {% assign status_badge_class = 'badge-info' %}
+{% when 'in_progress' %}
+  {% assign status_label = 'roadmap.status.in_progress' | t %}
+  {% assign status_badge_class = 'badge-warning' %}
+{% when 'completed' %}
+  {% assign status_label = 'roadmap.status.completed' | t %}
+  {% assign status_badge_class = 'badge-success' %}
+{% else %}
+  {% assign status_label = page_status %}
+  {% assign status_badge_class = 'badge-neutral' %}
+{% endcase %}
+<span class="badge badge-sm border-0 font-medium {{ status_badge_class }}{% if class != blank %} {{ class }}{% endif %}">{{ status_label }}</span>

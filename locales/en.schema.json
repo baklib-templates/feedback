@@ -1,62 +1,82 @@
 {
   "settings_schema": {
     "generic": {
-      "name": "Basic Setting",
-      "help_center_index_description": "Ideal for feature-rich product user manuals",
-      "list_index_description": "list dictionary style",
-      "header_name": "Header and footer menu",
-      "head_title": "Head HTML Settings",
+      "name": "General",
+      "header_name": "Header & footer menus",
+      "head_title": "Custom head HTML",
       "settings": {
-        "hero_image_url": {
-          "label": "Hero Banner",
-          "info": "For the help center index theme, size of 1900*600px is recommended."
+        "logo_url": {
+          "label": "Site logo",
+          "info": "Displayed in the site header"
         },
-        "description": {
-          "label": "site description"
+        "is_allow_published": {
+          "label": "Publish before review",
+          "info": "When enabled, submissions go live immediately; otherwise they require admin approval."
         },
-        "hot_tags": {
-            "label": "Hot search keywords (please separate them with English comma: ,)"
-        },
-        "company_name": {
-          "label": "Company Name",
-          "default": "Tanmer Inc."
+        "feedback_useful_type": {
+          "label": "Default feedback emoji",
+          "placeholder": "Copy from App settings → Feedback"
         },
         "copyright_info": {
-          "label": "Copyright Info",
-          "default": "All copyright served"
+          "label": "Copyright / legal notice",
+          "placeholder": "Shown in the site footer"
+        },
+        "changelog_path": {
+          "label": "Changelog URL"
         },
         "header_menu_html": {
-          "label": "Header navigation menu",
-          "info": "Supports HTML、Javascript and TailwindCss code"
+          "label": "Header menu HTML",
+          "info": "Additional links rendered in the header area"
         },
         "footer_menu_html": {
-          "label": "Footer navigation menu",
-          "info": "Supports HTML、Javascript and TailwindCss code"
+          "label": "Footer menu HTML",
+          "info": "List items rendered in the footer"
         },
         "head_html": {
-          "label": "Head HTML Code",
-          "info": "This part of the content will be embedded in the <head> tag of the site. Please use standard HTML format.",
-          "placeholder": "<meta name='author' content='Baklib' />"
+          "label": "Head HTML",
+          "info": "Injected before </head> on every page",
+          "placeholder": "<script>...</script>"
+        }
+      }
+    }
+  },
+  "schema": {
+    "recommendations": {
+      "baklib": { "name": "Baklib" },
+      "fashion": { "name": "Fashion" },
+      "old_school": { "name": "Retro" }
+    },
+    "lucide_icons": {
+      "name": "Lucide icons",
+      "settings": {
+        "lucide_icons": {
+          "label": "Allowed Lucide icon names",
+          "info": "One icon name per line. Used by the Lucide icon initializer in main.js."
         }
       }
     },
-    "page": {
-      "name": "Page",
-      "description": "Document content page",
-      "settings": {
-        "description":{
-          "label": "Description"
-        },
-        "content":{
-          "label": "Content",
-          "info": "Synchronized from data source, cannot be edited"
-        },
-        "icon": {
-          "label": "ICON",
-          "info": "1:1 ratio is recommended"
-        },
-        "tags":{
-          "label": "Tags"
+    "templates": {
+      "index": {
+        "settings": {
+          "slogan": { "label": "Site tagline" },
+          "description": { "label": "Welcome message" }
+        }
+      },
+      "roadmap": {
+        "settings": {
+          "title": { "label": "Roadmap page title" }
+        }
+      },
+      "page": {
+        "settings": {
+          "icon": {
+            "label": "Page icon",
+            "info": "Lucide icon shown in lists and detail views. Options come from site settings → Lucide icons."
+          },
+          "pinned": {
+            "label": "Pinned",
+            "info": "Pinned posts appear at the top of the list"
+          }
         }
       }
     }

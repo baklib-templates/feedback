@@ -26,11 +26,11 @@ function getLastVisitCookie(userId) {
 }
 
 function updateNewReplyCount() {
-  const currentPath = window.location.pathname;  // 当前路径，比如 "/s/profile"
+  const currentPath = window.location.pathname;
   if (currentPath === "/s/profile") {
     const countElem = document.getElementById('new-reply-count');
     if (countElem) countElem.style.display = 'none';
-    return;  // 这里 return 合法，跳过后续代码
+    return;
   }
 
   const current_UserId = {{ current_user.id }};
@@ -41,7 +41,6 @@ function updateNewReplyCount() {
     .then(text => {
       const json = JSON.parse(text);
       const count = json.count  || 0
-      console.log('新评论数量:', count);
       const indicator = document.getElementById('new-reply-indicator');
       const countElem = document.getElementById('new-reply-count');
       if(count > 0){
@@ -69,73 +68,69 @@ function updateNewReplyCount() {
 updateNewReplyCount();
 </script>
 
-<header class="bg-white shadow-sm">
-  <div class="w-full bg-white">
-    <div class="flex justify-between items-center px-6 pt-6 mx-auto max-w-7xl">
-      <!-- 左侧 Logo+品牌 -->
+<header class="overflow-hidden border-b border-base-300 bg-primary/10 shadow-sm">
+  <div class="w-full">
+    <div class="flex justify-between items-center px-4 pt-6 mx-auto max-w-7xl sm:px-6">
       <div class="flex items-center space-x-3">
         <img
           src="{{ logo_url }}"
           alt="{{ site.name }}"
-          class="w-10 h-10"
+          class="h-10 w-10 rounded-xl"
         />
-        <span class="text-2xl font-bold text-[#22223b]"> {{ site.name }} </span>
+        <span class="text-2xl font-bold text-base-content">{{ site.name }}</span>
       </div>
-      <!-- 右侧登录按钮 -->
       {% if current_user %}
         <div class="relative" data-controller="dropdown">
           <button
             type="button"
             data-action="dropdown#toggle click@window->dropdown#hide"
-            class="flex items-center px-3 py-2 space-x-2 rounded-full transition hover:bg-gray-100 dark:hover:bg-gray-700"
+            class="flex items-center px-3 py-2 space-x-2 rounded-full transition hover:bg-base-200"
           >
-
             <img src="{{ current_user.image |  default: avatar_url }}" class="w-8 h-8 rounded-full" />
-
-            <span id="new-reply-indicator" class="hidden absolute top-0 right-0 mt-0 mr-0 w-3 h-3 bg-red-600 rounded-full"></span>
+            <span id="new-reply-indicator" class="hidden absolute top-0 right-0 mt-0 mr-0 w-3 h-3 bg-error rounded-full"></span>
           </button>
 
           <div
             data-dropdown-target="menu"
-            class="hidden absolute right-0 z-10 mt-2 w-56 bg-white rounded-xl border border-gray-200 shadow-xl transition origin-top-right dark:bg-gray-800 dark:border-gray-700"
+            class="hidden absolute right-0 z-10 mt-2 w-56 bg-base-100 rounded-xl border border-base-300 shadow-xl transition origin-top-right"
             data-transition-enter-from="opacity-0 scale-95"
             data-transition-enter-to="opacity-100 scale-100"
             data-transition-leave-from="opacity-100 scale-100"
             data-transition-leave-to="opacity-0 scale-95"
           >
-            <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+            <div class="p-4 border-b border-base-300">
               <div class="flex items-center space-x-3">
                 <img src="{{ current_user.image |  default: avatar_url }}" class="w-8 h-8 rounded-full" />
-                <div class="text-sm font-semibold text-gray-800 dark:text-gray-100">{{ current_user.name }}</div>
+                <div class="text-sm font-semibold text-base-content">{{ current_user.name }}</div>
               </div>
             </div>
 
-            <div class="py-1 divide-y divide-gray-100 dark:divide-gray-700">
+            <div class="py-1 divide-y divide-base-300">
               <a href="/s/profile?type=comment" target="_blank"
-                class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                class="flex items-center px-4 py-2 text-sm text-base-content hover:bg-base-200"
               >
                 <svg class="mr-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path d="M5.121 17.804A9.003 9.003 0 1 1 12 21a8.978 8.978 0 0 1-6.879-3.196z" stroke-linecap="round" stroke-linejoin="round"/>
                   <path d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                我的动态
-                <span id="new-reply-count" class="px-2 py-0.5 ml-1 text-xs font-semibold text-white bg-red-600 rounded-full"></span>
+                {{ 'profile.activity' | t }}
+                <span id="new-reply-count" class="px-2 py-0.5 ml-1 text-xs font-semibold text-error-content bg-error rounded-full"></span>
               </a>
 
-              <a href="{{ current_user.profile_url }}" target="_blank" class="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+              <a href="{{ current_user.profile_url }}" target="_blank" class="flex items-center px-4 py-2 text-sm text-base-content hover:bg-base-200">
                 <svg class="mr-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4s-4 1.79-4 4 1.79 4 4 4z"/>
                   <path d="M4 20c0-2.21 3.582-4 8-4s8 1.79 8 4v1H4v-1z"/>
                 </svg>
-                个人资料
+                {{ 'generic.profile' | t }}
               </a>
                 {% form_tag 'sign_out' %}
-                  <button type="submit" class="flex items-center px-4 py-2 w-full text-sm text-left text-red-600 hover:bg-red-100 dark:text-red-400 dark:hover:bg-red-900">
+                  <button type="submit" class="flex items-center px-4 py-2 w-full text-sm text-left text-error hover:bg-error/10">
                     <svg class="mr-2 w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                       <path d="M17 16l4-4m0 0l-4-4m4 4H7"/>
                       <path d="M3 12h4" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    退出登录
+                    {{ 'buttons.logout' | t }}
                   </button>
                 {% endform_tag %}
 
@@ -146,95 +141,33 @@ updateNewReplyCount();
         {% form_tag 'sign_in_with_baklib' %}
           <input value="true" type="hidden" name="sign_up">
           <button
-          class="rounded-full border border-gray-200 bg-white px-6 py-2 font-semibold text-[#384062] shadow-sm transition hover:bg-gray-50">登录</button>
+          class="rounded-full border border-base-300 bg-base-100 px-6 py-2 font-semibold text-base-content shadow-sm transition hover:bg-base-200">{{ 'buttons.login' | t }}</button>
         {% endform_tag %}
       {% endif %}
     </div>
-    <!-- Tab 菜单 -->
-    <div class="flex items-center px-6 mx-auto mt-2 space-x-2 max-w-7xl">
-      <!-- Feedback (active) -->
+    <div class="flex items-center px-4 mx-auto mt-2 space-x-2 max-w-7xl sm:px-6">
       <a
         href="/"
-        class="-mb-px flex items-center rounded-t-xl  border-b-0 border-gray-200  px-2 sm:px-5  py-2 font-semibold {% if page.path == '/' %} border bg-gray-50 text-slate-700 shadow-sm {% else %} text-[#8b95b6] {% endif %}"
+        class="-mb-px flex items-center rounded-t-2xl border-b-0 px-2 sm:px-5 py-2 font-semibold {% if page.path == '/' %} border border-primary/20 bg-primary/10 text-primary shadow-sm {% else %} text-base-content/60 hover:text-base-content {% endif %}"
       >
-        <!-- 反馈图标 -->
-        <svg
-          class="mr-2 w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-        >
-          <rect
-            x="4"
-            y="4"
-            width="16"
-            height="16"
-            rx="2"
-            fill="currentColor"
-            fill-opacity="0.15"
-          />
-          <rect x="8" y="8" width="8" height="8" rx="1" fill="currentColor" />
-        </svg>
-        Feedback
+        {% render 'icon', name: 'message-square', class: 'mr-2 w-5 h-5' %}
+        {{ 'nav.feedback' | t }}
       </a>
-      <!-- Roadmap -->
       <a
         href="{{ roadmap.path }}"
-        class="flex items-center px-2 sm:px-5  py-2 rounded-t-xl font-semibold  transition border-b-0 hover:text-[#384062] {% if page.template_name == 'roadmap' %} border bg-gray-50 text-slate-700 shadow-sm {% else %} text-[#8b95b6] {% endif %}"
+        class="flex items-center rounded-t-2xl border-b-0 px-2 sm:px-5 py-2 font-semibold transition {% if page.template_name == 'roadmap' %} border border-primary/20 bg-primary/10 text-primary shadow-sm {% else %} text-base-content/60 hover:text-base-content {% endif %}"
         data-nav-tree-target="item"
       >
-        <!-- 路线图图标 -->
-        <svg
-          class="mr-2 w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M4 17V7a2 2 0 012-2h2a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2z"
-            fill="currentColor"
-            fill-opacity="0.15"
-          />
-          <path
-            d="M14 7h6M14 12h6M14 17h6"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-          />
-        </svg>
-        Roadmap
+        {% render 'icon', name: 'route', class: 'mr-2 w-5 h-5' %}
+        {{ 'nav.roadmap' | t }}
       </a>
-      <!-- Changelog -->
       {% if site.settings.changelog_path %}
       <a
         href="{{site.settings.changelog_path}}"
-        class="flex items-center px-2 sm:px-5  py-2 font-semibold text-[#8b95b6] transition hover:text-[#384062]"
+        class="flex items-center px-2 sm:px-5 py-2 font-semibold text-base-content/60 transition hover:text-base-content"
       >
-        <!-- 刷新图标 -->
-        <svg
-          class="mr-2 w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M4 4v6h6M20 20v-6h-6"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M9 20a8 8 0 107-7.75"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-          />
-        </svg>
-        Changelog
+        {% render 'icon', name: 'refresh-cw', class: 'mr-2 w-5 h-5' %}
+        {{ 'nav.changelog' | t }}
       </a>
       {% endif %}
     </div>

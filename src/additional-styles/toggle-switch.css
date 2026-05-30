@@ -19,7 +19,7 @@
 }
 
 .form-switch input[type="checkbox"]:checked+label {
-    @apply bg-indigo-500;
+    background-color: hsl(var(--theme-color-primary));
 }
 
 .form-switch input[type="checkbox"]:checked+label>span:first-child {
@@ -27,9 +27,11 @@
 }
 
 .form-switch input[type="checkbox"]:disabled+label {
-    @apply cursor-not-allowed bg-slate-100 border border-slate-200;
+    @apply cursor-not-allowed;
+    border: 1px solid hsl(var(--theme-color-base-300));
+    background-color: hsl(var(--theme-color-base-200));
 }
 
 .form-switch input[type="checkbox"]:disabled+label>span:first-child {
-    @apply bg-slate-400;
+    background-color: hsl(var(--theme-color-base-content) / 0.3);
 }

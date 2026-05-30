@@ -1,10 +1,37 @@
 {
-  "theme_label": "客户反馈调查",
-  "theme_description": "本系统专为产品团队打造，支持创建和管理客户反馈、功能建议、产品改进意见等内容。用户可提交反馈、参与投票，团队可对反馈进行分类、优先级排序，并结合数据分析辅助产品路线图制定。适用于产品需求收集、路线图展示、社区共创、用户调研等多种场景。",
+  "theme_label": "产品路线图与反馈",
+  "theme_description": "专为企业打造的产品路线图与反馈收集工具。在线发布产品规划、展示功能进展，收集用户反馈与功能建议，支持投票排序与优先级管理，帮助产品团队透明沟通、持续迭代。",
+  "nav": {
+    "feedback": "反馈",
+    "roadmap": "路线图",
+    "changelog": "更新日志"
+  },
+  "home": {
+    "sort_top": "热门",
+    "sort_new": "最新",
+    "sort_trending": "趋势",
+    "your_posts": "我的帖子",
+    "view_all_activity": "查看全部动态",
+    "no_posts_yet": "你还没有发布帖子",
+    "boards": "板块",
+    "view_all_posts": "全部帖子",
+    "most_helpful": "最有帮助"
+  },
   "generic": {
-    "close": "关闭",
     "search": "搜索",
-    "search_from": "输入关键词",
+    "filter": "筛选",
+    "status": "状态",
+    "board": "板块",
+    "all_statuses": "所有状态",
+    "all_boards": "所有板块",
+    "more": "加载更多",
+    "contributors": "贡献榜",
+    "similar": "相似问题",
+    "by_popularity": "按热度",
+    "votes": "投票",
+    "status_label": "状态",
+    "time": "时间",
+    "author": "作者",
     "all": "全部",
     "popular": "热门",
     "popular_reply": "热门评论",
@@ -30,6 +57,7 @@
     "under_review": "内容正在审核中，不对外展示",
     "under_comment": "登录以后，参与评论",
     "empty": "内容为空",
+    "pinned": "置顶",
     "articles": "篇文章",
     "feeds": " Feed 信息流",
     "read_more": "阅读更多",
@@ -41,14 +69,15 @@
     "terms2": "平台使用者须遵循相关声明和条款："
   },
   "placeholders": {
-    "search": "站内搜索",
+    "search": "搜索…",
+    "reply": "写下回复…",
     "input_feedback": "请与我们留言",
     "input_password": "输入密码"
   },
   "buttons": {
     "login": "登录",
     "logout": "退出",
-    "create_post": "发布",
+    "create_post": "发布帖子",
     "edit_post": "编辑内容",
     "submit": "提交",
     "cancel": "取消",
@@ -57,10 +86,42 @@
     "join": "加入社区",
     "sso_login": "SSO 登录",
     "baklib_login": "Baklib 账号登录",
-    "redirect_to": "未登录，跳转至登录页"
+    "redirect_to": "未登录，跳转至登录页",
+    "comment": "评论"
   },
-  "prompts": {
-    "page_restricted": "本页面需要授权才可以访问"
+  "profile": {
+    "activity": "动态",
+    "posts": "帖子",
+    "replies": "评论互动",
+    "replied_to_you": "回复了你在",
+    "commented_on": "评论了"
+  },
+  "roadmap": {
+    "status": {
+      "inbox": "待处理",
+      "planned": "计划中",
+      "in_progress": "进行中",
+      "completed": "已完成"
+    },
+    "board": {
+      "feature_request": "功能需求",
+      "bug": "BUG 报告",
+      "task": "细节优化",
+      "question": "问题咨询"
+    }
+  },
+  "form": {
+    "board_label": "看板",
+    "title_label": "标题",
+    "title_placeholder": "用一句话描述你的想法",
+    "status_draft": "待开发评审",
+    "submit_post": "提交帖子",
+    "disclaimer": "提交即表示你同意帖子在审核后对其他人可见。"
+  },
+  "toast": {
+    "create_failed": "创建失败，请重试",
+    "login_to_comment": "登录后才能评论",
+    "reply_published": "你的回复已发布"
   },
   "paginate": {
     "showing": "当前显示第",
@@ -69,11 +130,89 @@
     "previous": "上一页",
     "next": "下一页"
   },
+  "prompts": {
+    "page_restricted": "本页面需要授权才可以访问"
+  },
+  "schema": {
+    "recommendations": {
+      "baklib": { "name": "Baklib" },
+      "fashion": { "name": "时尚" },
+      "old_school": { "name": "复古" }
+    },
+    "lucide_icons": {
+      "name": "Lucide 图标",
+      "settings": {
+        "lucide_icons": {
+          "label": "允许的 Lucide 图标名称",
+          "info": "每行一个图标名，由 main.js 中的 Lucide 初始化器使用。"
+        }
+      }
+    },
+    "templates": {
+      "index": {
+        "settings": {
+          "slogan": { "label": "站点口号" },
+          "description": { "label": "欢迎说明" }
+        }
+      },
+      "roadmap": {
+        "settings": {
+          "title": { "label": "路线图页标题" }
+        }
+      },
+      "page": {
+        "settings": {
+          "icon": {
+            "label": "页面图标",
+            "info": "在列表与详情中显示的 Lucide 图标，选项来自站点设置 → Lucide 图标。"
+          },
+          "pinned": {
+            "label": "置顶",
+            "info": "置顶帖子会显示在列表顶部"
+          }
+        }
+      }
+    }
+  },
   "settings_schema": {
-    "beian": {
-      "name": "站点基本信息设置",
-      "title": "备案相关",
-      "beian_number": "备案号"
+    "generic": {
+      "name": "通用设置",
+      "header_name": "页眉与页脚菜单",
+      "head_title": "自定义 Head HTML",
+      "settings": {
+        "logo_url": {
+          "label": "站点 LOGO",
+          "info": "显示在站点顶部"
+        },
+        "is_allow_published": {
+          "label": "是否开启先发后审",
+          "info": "先发后审：前台提交即发布；先审后发：需后台审核后发布。"
+        },
+        "feedback_useful_type": {
+          "label": "首选反馈表情",
+          "placeholder": "在「应用设置」→「反馈设置」中复制"
+        },
+        "copyright_info": {
+          "label": "版权信息",
+          "placeholder": "显示在站点页脚"
+        },
+        "changelog_path": {
+          "label": "Changelog 链接"
+        },
+        "header_menu_html": {
+          "label": "页眉菜单 HTML",
+          "info": "显示在页眉区域的附加链接"
+        },
+        "footer_menu_html": {
+          "label": "页脚菜单 HTML",
+          "info": "显示在页脚区域的列表项"
+        },
+        "head_html": {
+          "label": "Head HTML",
+          "info": "注入到每个页面的 </head> 之前",
+          "placeholder": "<script>...</script>"
+        }
+      }
     }
   }
 }

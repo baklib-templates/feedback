@@ -11,18 +11,6 @@ module.exports = {
     extend: {
       colors: () => {
         return {
-          slate: {
-            150: "#E9EEF5"
-          },
-          navy: {
-            50: "#E7E9EF",
-            100: "#C2C9D6",
-            300: "#697A9B",
-            400: "#5C6B8A",
-            450: "#465675",
-            500: "#384766",
-            700: "#26334D"
-          },
           ...["primary", "secondary", "accent", "info", "success", "warning"].reduce((map, name) => {
             return {
               ...map,
@@ -64,5 +52,9 @@ module.exports = {
     require('@tailwindcss/typography'),
     require('daisyui')
   ],
+  daisyui: {
+    themes: false,
+    logs: false,
+  },
 }
 

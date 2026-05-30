@@ -1,62 +1,82 @@
 {
   "settings_schema": {
     "generic": {
-      "name": "站点基本信息设置",
-      "help_center_index_description": "功能丰富的产品知识库样式",
-      "list_index_description": "首页目录列表样式",
-      "header_name": "页头页尾导航菜单",
-      "head_title": "Head HTML 配置",
+      "name": "通用设置",
+      "header_name": "页眉与页脚菜单",
+      "head_title": "自定义 Head HTML",
       "settings": {
-        "hero_image_url": {
-          "label": "首页背景大图",
-          "info": "用于部分主题首页的背景横幅，建议1900*600px的深色图片"
+        "logo_url": {
+          "label": "站点 LOGO",
+          "info": "显示在站点顶部"
         },
-        "description": {
-          "label": "站点描述"
+        "is_allow_published": {
+          "label": "是否开启先发后审",
+          "info": "先发后审：前台提交即发布；先审后发：需后台审核后发布。"
         },
-        "hot_tags": {
-            "label": "热搜关键词（请用英文逗号「,」分隔）"
+        "feedback_useful_type": {
+          "label": "首选反馈表情",
+          "placeholder": "在「应用设置」→「反馈设置」中复制"
         },
         "copyright_info": {
-          "label": "备案/版权信息",
-          "default": "蜀ICP备15035023号"
+          "label": "版权信息",
+          "placeholder": "显示在站点页脚"
         },
-        "company_name": {
-          "label": "公司名称",
-          "default": "Baklib.cn"
+        "changelog_path": {
+          "label": "Changelog 链接"
         },
         "header_menu_html": {
-          "label": "Header页头导航菜单",
-          "info": "支持HTML标签和TailwindCss样式代码"
+          "label": "页眉菜单 HTML",
+          "info": "显示在页眉区域的附加链接"
         },
         "footer_menu_html": {
-          "label": "Footer页尾导航菜单",
-          "info": "支持HTML标签和TailwindCss样式代码"
+          "label": "页脚菜单 HTML",
+          "info": "显示在页脚区域的列表项"
         },
         "head_html": {
-          "label": "Head Meta HTML代码",
-          "info": "这部分内容会植入到站点的<head>标签内，请使用标准的 HTML 格式",
-          "placeholder": "<meta name='author' content='Baklib' />"
+          "label": "Head HTML",
+          "info": "注入到每个页面的 </head> 之前",
+          "placeholder": "<script>...</script>"
+        }
+      }
+    }
+  },
+  "schema": {
+    "recommendations": {
+      "baklib": { "name": "Baklib" },
+      "fashion": { "name": "时尚" },
+      "old_school": { "name": "复古" }
+    },
+    "lucide_icons": {
+      "name": "Lucide 图标",
+      "settings": {
+        "lucide_icons": {
+          "label": "允许的 Lucide 图标名称",
+          "info": "每行一个图标名，由 main.js 中的 Lucide 初始化器使用。"
         }
       }
     },
-    "page": {
-      "name": "页面",
-      "description": "文档内容页面",
-      "settings": {
-        "description":{
-          "label": "页面描述"
-        },
-        "content":{
-          "label": "内容",
-          "info": "同步自数据源，不可编辑"
-        },
-        "icon": {
-          "label": "页面图标",
-          "info": "用于显示页面图标，建议1:1比例"
-        },
-        "tags":{
-          "label": "标签"
+    "templates": {
+      "index": {
+        "settings": {
+          "slogan": { "label": "站点口号" },
+          "description": { "label": "欢迎说明" }
+        }
+      },
+      "roadmap": {
+        "settings": {
+          "title": { "label": "路线图页标题" }
+        }
+      },
+      "page": {
+        "settings": {
+          "icon": {
+            "label": "页面图标",
+            "info": "在列表与详情中显示的 Lucide 图标，选项来自站点设置 → Lucide 图标。"
+          },
+          "pinned": {
+            "label": "置顶",
+            "info": "置顶帖子会显示在列表顶部"
+          }
         }
       }
     }

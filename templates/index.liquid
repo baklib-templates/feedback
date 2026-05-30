@@ -1,111 +1,194 @@
 {% assign pages = site.pages['/'].children_in_list  %}
 
-  <!-- Main Content -->
-<div class="bg-gray-50">
-  <main class="container flex flex-col gap-8 px-4 py-8 mx-auto md:flex-row">
-    <!-- Feedback List -->
-    <turbo-frame id="feedback-list" class="flex-1">
-      {% assign order_by = params.sort  %}
-      {% if order_by %}
-        {% assign pages = pages | order_by: order_by %}
-      {% endif %}
-      {% query has_pinned from pages %}
-        {
-          "where": {
-            "settings.templates/page.liquid:pinned_eq": "true"
-          }
-        }
-      {% endquery %}
-      {% assign has_pinned = has_pinned | size %}
-      <!-- 通过 search 对 pages1 结果进行全文搜索, 并渲染结果 -->
-      {% assign q_present = params.q | present?  %}
-      {% if q_present %}
-        {% search pages, keywords: params.q %}
-            {% assign pages = search.pages %}
-        {% endsearch %}
-      {% endif %}
-      {% assign query_pages =  pages %}
-      {% if has_pinned > 0 %}
-        {% query pages from pages %}
-        {
-          "where": {
-            "settings.templates/page.liquid:status_eq": "{{ params.status }}",
-            "settings.templates/page.liquid:board_eq": "{{ params.board }}",
-            "settings.templates/page.liquid:pinned_eq": "false"
-          }
-        }
-        {% endquery %}
-      {% else %}
-        {% query pages from pages %}
-        {
-          "where": {
-            "settings.templates/page.liquid:status_eq": "{{ params.status }}",
-            "settings.templates/page.liquid:board_eq": "{{ params.board }}"
-          }
-        }
-        {% endquery %}
-      {% endif %}
+<div class="min-h-screen bg-base-200">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 py-8 lg:py-10">
+    {% render 'section_hero', description: page.settings.description %}
 
-      <!-- Top bar -->
-      <div class="flex flex-col gap-3 mb-4 bg-blue-50 rounded-2xl border border-blue-200 md:flex-row md:items-center md:justify-between">
-        <div
-          class=" p-6 text-[#0a1442] text-base font-normal leading-relaxed"
-          >
-          <div class="mb-2">
-            <span class="text-xl font-bold">{{ page.settings.slogan }}</span>
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-start">
+      <div class="min-w-0 flex-1 lg:w-3/4">
+        <turbo-frame id="feedback-list" class="block">
+          {% assign order_by = params.sort  %}
+          {% if order_by %}
+            {% assign pages = pages | order_by: order_by %}
+          {% endif %}
+          {% query has_pinned from pages %}
+            {
+              "where": {
+                "settings.templates/page.liquid:pinned_eq": "true"
+              }
+            }
+          {% endquery %}
+          {% assign has_pinned = has_pinned | size %}
+          {% assign q_present = params.q | present?  %}
+          {% if q_present %}
+            {% search pages, keywords: params.q %}
+                {% assign pages = search.pages %}
+            {% endsearch %}
+          {% endif %}
+          {% assign query_pages =  pages %}
+          {% if has_pinned > 0 %}
+            {% query pages from pages %}
+            {
+              "where": {
+                "settings.templates/page.liquid:status_eq": "{{ params.status }}",
+                "settings.templates/page.liquid:board_eq": "{{ params.board }}",
+                "settings.templates/page.liquid:pinned_eq": "false"
+              }
+            }
+            {% endquery %}
+          {% else %}
+            {% query pages from pages %}
+            {
+              "where": {
+                "settings.templates/page.liquid:status_eq": "{{ params.status }}",
+                "settings.templates/page.liquid:board_eq": "{{ params.board }}"
+              }
+            }
+            {% endquery %}
+          {% endif %}
+
+          {% render 'filter' %}
+
+          <div class="flex flex-col gap-3 mt-2">
+            {% if (params._page == '1' or params._page == nil) and has_pinned > 0  %}
+              {% query pinned_pages from query_pages %}
+              {
+                "where": {
+                  "settings.templates/page.liquid:status_eq": "{{ params.status }}",
+                  "settings.templates/page.liquid:board_eq": "{{ params.board }}",
+                  "settings.templates/page.liquid:pinned_eq": "true"
+                }
+              }
+              {% endquery %}
+              {% for page in pinned_pages %}
+                {% render 'page', page: page %}
+              {% endfor %}
+            {% endif %}
+            {% paginate_tag pages, per: 12 %}
+              {% for page in pages %}
+                {% render 'page', page: page %}
+              {% endfor %}
+            {% endpaginate_tag %}
           </div>
-          {{ page.settings.description }}
-        </div>
+          {% render 'paginate', paginate: paginate %}
+        </turbo-frame>
       </div>
 
-      {% render 'filter' %}
-      <!-- Feedback List Items -->
-      <div class="mt-4 w-full border divide-y dark:divide-border divide-gray-100/60 sm:rounded-lg">
-      {% if (params._page == '1' or params._page == nil) and has_pinned > 0  %}
-        {% query pinned_pages from query_pages %}
-        {
-          "where": {
-            "settings.templates/page.liquid:status_eq": "{{ params.status }}",
-            "settings.templates/page.liquid:board_eq": "{{ params.board }}",
-            "settings.templates/page.liquid:pinned_eq": "true"
-          }
-        }
-        {% endquery %}
-        {% for page in pinned_pages %}
-          {% render 'page', page: page %}
-        {% endfor %}
-      {% endif %}
-        {% paginate_tag pages, per: 12 %}
-          {% for page in pages %}
-            {% render 'page', page: page %}
-          {% endfor %}
-        {% endpaginate_tag %}
-      </div>
-      {% render 'paginate', paginate: paginate %}
-    </turbo-frame>
+      <aside class="w-full shrink-0 space-y-4 lg:w-1/4 lg:max-w-xs">
+        {% if current_user %}
+          {% assign my_posts = current_user.pages | order_by: '-published_at' %}
+          {% assign my_posts_total = current_user.pages_count | default: 0 %}
+          <section class="rounded-2xl border border-base-300 bg-primary/10 p-4">
+            <h2 class="mb-3 text-sm font-semibold text-base-content">
+              {{ 'home.your_posts' | t }}
+              {% if my_posts_total > 0 %}
+                <span class="font-normal text-base-content/50">({{ my_posts_total }})</span>
+              {% endif %}
+            </h2>
+            {% if my_posts.size > 0 %}
+              <ul class="space-y-2">
+                {% for post in my_posts %}
+                  {% if forloop.index <= 3 %}
+                    {% assign post_status = post.settings.status | default: 'inbox' %}
+                    {% case post_status %}
+                    {% when 'planned' %}{% assign status_dot_class = 'bg-info' %}
+                    {% when 'in_progress' %}{% assign status_dot_class = 'bg-warning' %}
+                    {% when 'completed' %}{% assign status_dot_class = 'bg-success' %}
+                    {% else %}{% assign status_dot_class = 'bg-neutral' %}
+                    {% endcase %}
+                    <li>
+                      <a
+                        href="{{ post.path }}"
+                        class="flex gap-2.5 items-start rounded-xl py-1.5 text-sm transition-colors hover:bg-base-200/80"
+                      >
+                        <span class="mt-1.5 w-2 h-2 shrink-0 rounded-full {{ status_dot_class }}" aria-hidden="true"></span>
+                        <span class="font-medium leading-snug text-base-content line-clamp-2">{{ post.settings.title }}</span>
+                      </a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+              <a href="/s/profile?type=post" class="inline-block mt-3 text-sm font-medium text-primary hover:underline">
+                {{ 'home.view_all_activity' | t }}
+              </a>
+            {% else %}
+              <p class="text-sm text-base-content/60">{{ 'home.no_posts_yet' | t }}</p>
+            {% endif %}
+          </section>
+        {% endif %}
 
-    <!-- Sidebar: Most Helpful -->
-    {% assign users = site.users | order_by: '-pages_count' %}
-    <aside class="w-full md:w-72">
-      <div class="p-4 bg-white rounded shadow">
-        <h2 class="mb-4 text-lg font-semibold">贡献榜</h2>
-        <ul class="space-y-2">
-          {% for user in users %}
-          <li class="flex justify-between items-center">
-            <span class="text-gray-800">{{user.name}}</span>
-            <span class="px-2 py-0.5 text-xs text-gray-600 bg-gray-100 rounded"> {{ user.pages_count }} </span>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-    </aside>
-  </main>
-  <div aria-roledescription="dialog"
-    id="headlessui-dialog" role="dialog" aria-modal="true" data-headlessui-state="open">
+        {% capture board_query_suffix %}status={{ params.status }}&sort={{ params.sort }}&q={{ params.q }}{% endcapture %}
+        <section class="rounded-2xl border border-base-300 bg-base-100 p-4">
+          <h2 class="mb-3 text-sm font-semibold text-base-content">{{ 'home.boards' | t }}</h2>
+          <ul class="space-y-1">
+            <li>
+              <a href="?board=&{{ board_query_suffix }}" class="flex gap-2.5 items-center rounded-xl px-2 py-2 text-sm text-base-content/80 hover:bg-base-200/80 {% if params.board == blank %}bg-primary/10 font-medium text-primary{% endif %}">
+                {% render 'icon', name: 'message-square', class: 'w-4 h-4 shrink-0 text-primary/70' %}
+                {{ 'home.view_all_posts' | t }}
+              </a>
+            </li>
+            <li>
+              <a href="?board=feature_request&{{ board_query_suffix }}" class="flex gap-2.5 items-center rounded-xl px-2 py-2 text-sm text-base-content/80 hover:bg-base-200/80 {% if params.board == 'feature_request' %}bg-primary/10 font-medium text-primary{% endif %}">
+                {% render 'icon', name: 'lightbulb', class: 'w-4 h-4 shrink-0 text-primary/70' %}
+                {{ 'roadmap.board.feature_request' | t }}
+              </a>
+            </li>
+            <li>
+              <a href="?board=bug&{{ board_query_suffix }}" class="flex gap-2.5 items-center rounded-xl px-2 py-2 text-sm text-base-content/80 hover:bg-base-200/80 {% if params.board == 'bug' %}bg-primary/10 font-medium text-primary{% endif %}">
+                {% render 'icon', name: 'bug', class: 'w-4 h-4 shrink-0 text-primary/70' %}
+                {{ 'roadmap.board.bug' | t }}
+              </a>
+            </li>
+            <li>
+              <a href="?board=task&{{ board_query_suffix }}" class="flex gap-2.5 items-center rounded-xl px-2 py-2 text-sm text-base-content/80 hover:bg-base-200/80 {% if params.board == 'task' %}bg-primary/10 font-medium text-primary{% endif %}">
+                {% render 'icon', name: 'list', class: 'w-4 h-4 shrink-0 text-primary/70' %}
+                {{ 'roadmap.board.task' | t }}
+              </a>
+            </li>
+            <li>
+              <a href="?board=question&{{ board_query_suffix }}" class="flex gap-2.5 items-center rounded-xl px-2 py-2 text-sm text-base-content/80 hover:bg-base-200/80 {% if params.board == 'question' %}bg-primary/10 font-medium text-primary{% endif %}">
+                {% render 'icon', name: 'help-circle', class: 'w-4 h-4 shrink-0 text-primary/70' %}
+                {{ 'roadmap.board.question' | t }}
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        {% assign contributors = site.users | order_by: '-pages_count' %}
+        <section class="rounded-2xl border border-base-300 bg-base-100 p-4">
+          <h2 class="mb-3 text-sm font-semibold text-base-content">{{ 'home.most_helpful' | t }}</h2>
+          <ul class="space-y-2.5">
+            {% for user in contributors %}
+              {% if forloop.index <= 8 %}
+                {% assign rank = forloop.index %}
+                {% assign contributor_avatar = 'https://api.dicebear.com/7.x/rings/svg?seed=' | append: user.id %}
+                <li class="flex gap-2.5 items-center">
+                  <span class="flex justify-center items-center w-5 shrink-0 text-xs font-bold tabular-nums {% if rank == 1 %}text-warning{% elsif rank == 2 %}text-base-content/50{% elsif rank == 3 %}text-warning/60{% else %}text-base-content/30{% endif %}">
+                    {% if rank == 1 %}
+                      {% render 'icon', name: 'star', class: 'w-4 h-4 fill-current' %}
+                    {% elsif rank == 2 %}
+                      {% render 'icon', name: 'star', class: 'w-4 h-4' %}
+                    {% elsif rank == 3 %}
+                      {% render 'icon', name: 'star', class: 'w-4 h-4 opacity-70' %}
+                    {% else %}
+                      {{ rank }}
+                    {% endif %}
+                  </span>
+                  <img src="{{ user.avatar_url | default: contributor_avatar }}" alt="" class="object-cover w-7 h-7 rounded-full bg-base-200 shrink-0" width="28" height="28">
+                  <span class="flex-1 min-w-0 text-sm font-medium truncate text-base-content">{{ user.name }}</span>
+                  <span class="inline-flex gap-1 items-center text-sm font-semibold tabular-nums text-base-content/70">
+                    {{ user.pages_count }}
+                    {% render 'icon', name: 'circle-check', class: 'w-3.5 h-3.5 text-success' %}
+                  </span>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </section>
+      </aside>
+    </div>
   </div>
 </div>
-
-
 
 {% schema %}
 {
@@ -115,16 +198,10 @@
 "sub_page_templates": ["page", "roadmap"],
 "settings": [
 {
-"id": "slogan",
-"type": "text",
-"label": "站点口号",
-"default": "意见反馈指引"
-},
-{
 "id": "description",
 "type": "code",
-"label": "t:settings_schema.generic.settings.description.label",
-"default": "<div class=\"w-full max-w-4xl px-4 mx-auto text-sm leading-relaxed space-y-4\">\n  <p>\n    欢迎您提交反馈与建议！我们非常重视您的声音，您的意见将帮助我们持续优化产品体验。在提交之前，请注意以下几点：\n  </p>\n  <ul class=\"space-y-2 list-disc list-inside\">\n  <li>\n  ✅ <strong>请先搜索已有反馈</strong>，避免重复提交相似建议；\n  </li>\n    <li>\n      ✅ <strong>每次仅反馈一个问题或建议</strong>，便于我们快速理解和处理；\n    </li>\n    <li>\n  📌 <strong>欢迎提交功能建议、体验反馈、使用感受、问题咨询等各类意见</strong>；\n    </li>\n  </ul>\n  <p>\n    🙏 感谢您的宝贵时间与支持！我们会认真阅读每一条反馈，并尽可能在后续版本中持续改进。\n  </p>\n</div>"
+"label": "t:schema.templates.index.settings.description.label",
+"default": "<div class=\"w-full max-w-4xl px-4 mx-auto text-sm leading-relaxed space-y-4\">\n  <p>\n    Welcome! We value your feedback. Before submitting, please note:\n  </p>\n  <ul class=\"space-y-2 list-disc list-inside\">\n  <li>\n  ✅ <strong>Search existing posts</strong> to avoid duplicates;\n  </li>\n    <li>\n      ✅ <strong>One issue or idea per post</strong> so we can respond faster;\n    </li>\n    <li>\n  📌 <strong>Feature requests, bugs, UX feedback, and questions</strong> are all welcome;\n    </li>\n  </ul>\n  <p>\n    🙏 Thank you for helping us improve the product.\n  </p>\n</div>"
 }
 ]
 }

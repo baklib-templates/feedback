@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
-import { DirectUpload } from "../active_storage/index";
+import { DirectUpload } from "@rails/activestorage";
 import { post } from "@rails/request.js";
 import { renderUrl } from "./renderUrl";
 

@@ -7,53 +7,23 @@
 @import './additional-styles/tom-select.css';
 @import './additional-styles/color_picker_controller.css';
 
-@plugin "daisyui" {
-  themes:
-    light --default,
-    dark;
-  root: ":root";
-  include:;
-  exclude:;
-  prefix:;
-  logs: true;
-}
-
-@plugin "daisyui/theme" {
-  name: "light";
-  default: true;
-  --color-primary: oklch(54.1% 0.281 293.009);
-}
-
-@plugin "daisyui/theme" {
-  name: "dark";
-  prefersdark: false;
-  --color-primary: oklch(54.1% 0.281 293.009);
-}
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @config '../tailwind.config.js';
-@plugin "daisyui";
 
+/* Baklib brand static tokens (sync with statics/brand.liquid) */
+:root {
+  --radius-selector: 2rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 2px;
+  --depth: 1;
+  --noise: 0;
+}
 
-/* generic css */
-body.asleep header {
-  @apply h-[80px] shadow-md shadow-gray-400
-}
-body.asleep header .ctm-header_between {
-  @apply h-full
-}
-body.asleep header .ctm-header_center {
-  @apply h-full mt-6 sm:mt-5
-}
-body.asleep header .asleep_toggle {
-  @apply opacity-0 mt-4
-}
-body.asleep #screen {
-  @apply h-[80px]
-}
 /* Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -90,11 +60,13 @@ body.asleep #screen {
 }
 
 .form-range::-moz-range-track {
-  @apply h-[var(--range-track-h)] w-full rounded-full bg-slate-150 dark:bg-navy-500;
+  @apply h-[var(--range-track-h)] w-full rounded-full;
+  background-color: hsl(var(--theme-color-base-300));
 }
 
 .form-range::-webkit-slider-runnable-track {
-  @apply h-[var(--range-track-h)] w-full rounded-full bg-slate-150 dark:bg-navy-500;
+  @apply h-[var(--range-track-h)] w-full rounded-full;
+  background-color: hsl(var(--theme-color-base-300));
 }
 
 .editor.editing {
@@ -110,7 +82,7 @@ body.asleep #screen {
 }
 
 .popper-box {
-  @apply bg-white
+  background-color: hsl(var(--theme-color-base-100));
 }
 
 .bke-popper-menu {

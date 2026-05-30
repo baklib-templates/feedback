@@ -3,77 +3,92 @@
 @import "tippy.js/animations/shift-away.css";
 
 .tippy-box {
-  @apply bg-slate-800 text-slate-50 dark:bg-navy-500 dark:text-navy-50 text-xs;
+  background-color: hsl(var(--theme-color-neutral));
+  color: hsl(var(--theme-color-neutral-content));
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .tippy-svg-arrow svg {
-  @apply shadow-lg fill-current text-slate-800 dark:text-navy-500;
+  fill: currentColor;
+  color: hsl(var(--theme-color-neutral));
+  filter: drop-shadow(0 4px 6px rgb(0 0 0 / 0.1));
 }
 
 .tippy-box[data-theme~="content"] .tippy-content {
-  @apply p-0;
+  padding: 0;
 }
 
 .tippy-box[data-theme~="primary"] {
-  @apply text-white bg-primary dark:bg-accent;
+  background-color: hsl(var(--theme-color-primary));
+  color: hsl(var(--theme-color-primary-content));
 }
 
 .tippy-box[data-theme~="primary"] > .tippy-svg-arrow svg {
-  @apply text-primary dark:text-accent;
+  color: hsl(var(--theme-color-primary));
 }
 
 .tippy-box[data-theme~="secondary"] {
-  @apply text-white bg-secondary;
+  background-color: hsl(var(--theme-color-secondary));
+  color: hsl(var(--theme-color-secondary-content));
 }
 
 .tippy-box[data-theme~="secondary"] > .tippy-svg-arrow svg {
-  @apply text-secondary;
+  color: hsl(var(--theme-color-secondary));
 }
 
 .tippy-box[data-theme~="info"] {
-  @apply text-white bg-info;
+  background-color: hsl(var(--theme-color-info));
+  color: hsl(var(--theme-color-info-content));
 }
 
 .tippy-box[data-theme~="info"] > .tippy-svg-arrow svg {
-  @apply text-info;
+  color: hsl(var(--theme-color-info));
 }
 
 .tippy-box[data-theme~="success"] {
-  @apply text-white bg-success;
+  background-color: hsl(var(--theme-color-success));
+  color: hsl(var(--theme-color-success-content));
 }
 
 .tippy-box[data-theme~="success"] > .tippy-svg-arrow svg {
-  @apply text-success;
+  color: hsl(var(--theme-color-success));
 }
 
 .tippy-box[data-theme~="warning"] {
-  @apply text-white bg-warning;
+  background-color: hsl(var(--theme-color-warning));
+  color: hsl(var(--theme-color-warning-content));
 }
 
 .tippy-box[data-theme~="warning"] > .tippy-svg-arrow svg {
-  @apply text-warning;
+  color: hsl(var(--theme-color-warning));
 }
 
 .tippy-box[data-theme~="error"] {
-  @apply text-white bg-error;
+  background-color: hsl(var(--theme-color-error));
+  color: hsl(var(--theme-color-error-content));
 }
 
 .tippy-box[data-theme~="error"] > .tippy-svg-arrow svg {
-  @apply text-error;
+  color: hsl(var(--theme-color-error));
 }
 
 .tippy-box[data-theme~="light"] {
-  @apply bg-slate-150 text-slate-600;
+  background-color: hsl(var(--theme-color-base-200));
+  color: hsl(var(--theme-color-base-content));
 }
 
 .tippy-box[data-theme~="light"] > .tippy-svg-arrow svg {
-  @apply text-slate-150;
+  color: hsl(var(--theme-color-base-200));
 }
 
 .tippy-box[data-theme~="white"] {
-  @apply bg-white border shadow-sm text-slate-600;
+  background-color: hsl(var(--theme-color-base-100));
+  border: 1px solid hsl(var(--theme-color-base-300));
+  color: hsl(var(--theme-color-base-content));
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
 .tippy-box[data-theme~="transparent"] {
-  @apply bg-transparent;
+  background-color: transparent;
 }

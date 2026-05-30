@@ -1,0 +1,13 @@
+site:
+  language: "en"
+  time_zone: "UTC"
+  favicon: "images/thumbnail.png"
+  settings:
+    logo_url: "images/logo.png"
+    is_allow_published: false
+    feedback_useful_type: "😊"
+    copyright_info: "Powered by Baklib Feedback"
+    changelog_path: ""
+    header_menu_html: "<a class='underline text-base-content/60 hover:no-underline' href='/'>Home</a>"
+    footer_menu_html: "<li><a class='underline text-base-content/60 hover:no-underline' href='/'>Home</a></li>"
+    head_html: ""

@@ -1,77 +1,94 @@
 {% form_tag 'edit_page', page, class: 'contents' %}
 
-<input value="" autocomplete="off" type="hidden" name="page[template_variables][status]" x-model="status">
-<input value="" autocomplete="off" type="hidden" name="page[template_variables][board]" x-model="board">
+<input value="{{ page_status | default: 'inbox' }}" autocomplete="off" type="hidden" name="page[template_variables][status]" x-model="status">
+<input value="{{ page_board | default: 'feature_request' }}" autocomplete="off" type="hidden" name="page[template_variables][board]" x-model="board">
+<input value="{{ page_icon_value | default: 'message-square' }}" autocomplete="off" type="hidden" name="page[template_variables][icon]" x-model="icon">
 <input value="update_page_success" autocomplete="off" type="hidden" name="return_template_name">
-<div class="col-span-2"><span class="font-medium">状态</span></div>
-<div data-controller="dropdown" class="relative col-span-3">
-  <button class="px-2 py-1 text-xs font-medium text-pink-600 bg-pink-50 rounded-md border border-pink-100 hover:shadow hover:bg-pink-100 hover:shadow-pink-200/40 dark:hover:shadow-pink-700/20 dark:bg-pink-500/10 dark:hover:bg-pink-500/20 hover:border-pink-200 dark:text-pink-500 dark:border-pink-500/10 dark:hover:border-pink-500/10"
-    type="button" data-action="dropdown#toggle click@window->dropdown#hide" x-text="status_name">
-  </button>
 
-  <div data-dropdown-target="menu"
-    class="absolute right-0 hidden min-w-[10rem] origin-top-right transform rounded-md border border-slate-150 bg-white px-2 py-1.5 font-inter shadow-lg transition dark:border-navy-500 dark:bg-navy-700 z-50">
-    <div class="flex flex-col space-y-2 w-full h-full rounded-md">
-      <button type="submit"
-        class="text-sm text-center cursor-pointer"
-        @click="status_name = '待处理';status='inbox'"
-        data-action="dropdown#toggle"
-      >待处理
-      </button>
-      <button type="submit"
-      @click="status_name = '计划中';status='planned'"
-      data-action="dropdown#toggle
-        class="text-sm text-center cursor-pointer"
-        data-value="planned">计划中
-      </button>
-      <button type="submit"
-      @click="status_name = '处理中';status='in_progress'"
-      data-action="dropdown#toggle
-        class="text-sm text-center cursor-pointer">处理中
-      </button>
-      <button type="submit"
-      @click="status_name = '已完成';status='completed'"
-      data-action="dropdown#toggle
-        class="text-sm text-center cursor-pointer">已完成
-      </button>
-    </div>
-  </div>
-</div>
+<div class="col-span-2"><span class="font-medium">{{ 'schema.lucide_icons.name' | t }}</span></div>
+<details class="dropdown dropdown-end col-span-3">
+  <summary class="flex items-center px-2 py-1 text-xs font-medium truncate rounded-md border text-base-content/70 border-base-300 bg-base-200/50 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+    {% render 'icon', name: page_icon_value, class: 'w-4 h-4 text-primary/70' %}
+  </summary>
+  <ul class="dropdown-content menu z-[999] max-h-48 min-w-[10rem] overflow-y-auto rounded-box border border-base-300 bg-base-100 p-1 shadow-lg">
+    {% assign lucide_icon_lines = site.settings.lucide_icons | newline_to_br | split: '<br />' %}
+    {% for icon_line in lucide_icon_lines %}
+      {% assign icon_name = icon_line | strip %}
+      {% if icon_name != blank %}
+      <li>
+        <button type="submit"
+          class="text-sm"
+          @click="icon = '{{ icon_name }}'; $el.closest('details').removeAttribute('open')"
+        >{{ icon_name }}</button>
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</details>
 
-<div class="col-span-2"><span class="font-medium">Board</span></div>
-<div data-controller="dropdown" class="relative col-span-3">
-  <button class="flex items-center px-2 py-1 text-xs font-medium truncate rounded-md border text-background-accent dark:text-foreground border-gray-100/50 bg-gray-50/50 dark:bg-secondary dark:border-border/70 dark:shadow-sm"
-    type="button" data-action="dropdown#toggle click@window->dropdown#hide" x-text="board_name">
-  </button>
+<div class="col-span-2"><span class="font-medium">{{ 'generic.status_label' | t }}</span></div>
+<details class="dropdown dropdown-end col-span-3">
+  <summary class="px-2 py-1 text-xs font-medium rounded-md border border-base-300 bg-base-200/50 hover:bg-base-200 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+    {{ status_display }}
+  </summary>
+  <ul class="dropdown-content menu z-[999] min-w-[10rem] rounded-box border border-base-300 bg-base-100 p-1 shadow-lg">
+    <li>
+      <button type="submit"
+        class="text-sm"
+        @click="status = 'inbox'; $el.closest('details').removeAttribute('open')"
+      >{{ 'roadmap.status.inbox' | t }}</button>
+    </li>
+    <li>
+      <button type="submit"
+        class="text-sm"
+        @click="status = 'planned'; $el.closest('details').removeAttribute('open')"
+      >{{ 'roadmap.status.planned' | t }}</button>
+    </li>
+    <li>
+      <button type="submit"
+        class="text-sm"
+        @click="status = 'in_progress'; $el.closest('details').removeAttribute('open')"
+      >{{ 'roadmap.status.in_progress' | t }}</button>
+    </li>
+    <li>
+      <button type="submit"
+        class="text-sm"
+        @click="status = 'completed'; $el.closest('details').removeAttribute('open')"
+      >{{ 'roadmap.status.completed' | t }}</button>
+    </li>
+  </ul>
+</details>
 
-  <div data-dropdown-target="menu"
-    class="absolute right-0 hidden min-w-[10rem] origin-top-right transform rounded-md border border-slate-150 bg-white px-2 py-1.5 font-inter shadow-lg transition dark:border-navy-500 dark:bg-navy-700 z-50">
-    <div class="flex flex-col space-y-2 w-full h-full rounded-md">
+<div class="col-span-2"><span class="font-medium">{{ 'form.board_label' | t }}</span></div>
+<details class="dropdown dropdown-end col-span-3">
+  <summary class="flex items-center px-2 py-1 text-xs font-medium truncate rounded-md border text-base-content/70 border-base-300 bg-base-200/50 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+    <span class="truncate">{{ board_display }}</span>
+  </summary>
+  <ul class="dropdown-content menu z-[999] min-w-[10rem] rounded-box border border-base-300 bg-base-100 p-1 shadow-lg">
+    <li>
       <button type="submit"
-      @click="board_name = '💡 功能需求';board='feature_request'"
-      data-action="dropdown#toggle"
-        class="text-sm text-center cursor-pointer"
-      >💡 功能需求
-      </button>
+        class="text-sm"
+        @click="board = 'feature_request'; $el.closest('details').removeAttribute('open')"
+      >{{ 'roadmap.board.feature_request' | t }}</button>
+    </li>
+    <li>
       <button type="submit"
-      @click="board_name = '🐛 BUG报告';board='bug'"
-      data-action="dropdown#toggle"
-        class="text-sm text-center cursor-pointer"
-      >🐛 BUG报告
-      </button>
+        class="text-sm"
+        @click="board = 'bug'; $el.closest('details').removeAttribute('open')"
+      >{{ 'roadmap.board.bug' | t }}</button>
+    </li>
+    <li>
       <button type="submit"
-      @click="board_name = '✨ 细节优化';board='task'"
-      data-action="dropdown#toggle"
-        class="text-sm text-center cursor-pointer"
-      >✨ 细节优化
-      </button>
+        class="text-sm"
+        @click="board = 'task'; $el.closest('details').removeAttribute('open')"
+      >{{ 'roadmap.board.task' | t }}</button>
+    </li>
+    <li>
       <button type="submit"
-      @click="board_name = '❓ 问题咨询';board='question'"
-      data-action="dropdown#toggle"
-        class="text-sm text-center cursor-pointer"
-      >❓ 问题咨询
-      </button>
-    </div>
-  </div>
-</div>
+        class="text-sm"
+        @click="board = 'question'; $el.closest('details').removeAttribute('open')"
+      >{{ 'roadmap.board.question' | t }}</button>
+    </li>
+  </ul>
+</details>
 {% endform_tag %}

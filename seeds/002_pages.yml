@@ -1,0 +1,100 @@
+pages:
+  name: "Feedback"
+  slug: "index"
+  template_name: "index"
+  settings:
+    description: "<div class=\"w-full max-w-4xl px-4 mx-auto text-sm leading-relaxed space-y-4\">\n  <p>\n    Welcome! We value your feedback. Before submitting, please note:\n  </p>\n  <ul class=\"space-y-2 list-disc list-inside\">\n  <li>\n  ✅ <strong>Search existing posts</strong> to avoid duplicates;\n  </li>\n    <li>\n      ✅ <strong>One issue or idea per post</strong> so we can respond faster;\n    </li>\n    <li>\n  📌 <strong>Feature requests, bugs, UX feedback, and questions</strong> are all welcome;\n    </li>\n  </ul>\n  <p>\n    🙏 Thank you for helping us improve the product.\n  </p>\n</div>"
+  children:
+    - name: "Add keyboard shortcuts for power users"
+      slug: "keyboard-shortcuts"
+      template_name: "page"
+      settings:
+        icon: "terminal"
+        title: "Add keyboard shortcuts for power users"
+        content: "<p>Power users would benefit from keyboard shortcuts for common actions like search, new post, and navigation between sections. A cheat sheet overlay (press <code>?</code>) would help discovery.</p>"
+        status: inbox
+        board: feature_request
+        pinned: false
+
+    - name: "Search results empty on mobile Safari"
+      slug: "mobile-safari-search"
+      template_name: "page"
+      settings:
+        icon: "bug"
+        title: "Search results empty on mobile Safari"
+        content: "<p>When searching from the home page on iOS Safari, the results list stays empty even though the same query works on desktop Chrome. Clearing cache does not help. Steps: open home, type a known post title, tap Search.</p>"
+        status: inbox
+        board: bug
+        pinned: false
+
+    - name: "How do I export feedback to CSV?"
+      slug: "export-feedback-csv"
+      template_name: "page"
+      settings:
+        icon: "help-circle"
+        title: "How do I export feedback to CSV?"
+        content: "<p>Our team wants to pull feedback into a spreadsheet for quarterly reviews. Is there an export option, or a recommended workflow via API?</p>"
+        status: inbox
+        board: question
+        pinned: false
+
+    - name: "Roadmap"
+      slug: "roadmap"
+      template_name: "roadmap"
+      settings:
+        title: "Product Roadmap"
+      children:
+        - name: "Dark mode support"
+          slug: "dark-mode-support"
+          template_name: "page"
+          settings:
+            icon: "sparkles"
+            title: "Dark mode support"
+            content: "<p>Please add a system-aware dark mode to reduce eye strain during evening use. Should respect OS preference and allow manual override in profile settings.</p>"
+            status: inbox
+            board: feature_request
+            pinned: false
+
+        - name: "Two-factor authentication"
+          slug: "two-factor-authentication"
+          template_name: "page"
+          settings:
+            icon: "shield"
+            title: "Two-factor authentication"
+            content: "<p>Support TOTP and WebAuthn for account login. Planned for the next security milestone after SSO improvements ship.</p>"
+            status: planned
+            board: feature_request
+            pinned: false
+
+        - name: "Real-time collaboration on posts"
+          slug: "real-time-collaboration"
+          template_name: "page"
+          settings:
+            icon: "share-2"
+            title: "Real-time collaboration on posts"
+            content: "<p>Allow multiple team members to co-edit a feedback post with live cursors and conflict-free merging. Currently in active development for internal dogfooding.</p>"
+            status: in_progress
+            board: feature_request
+            pinned: false
+
+        - name: "Performance dashboard"
+          slug: "performance-dashboard"
+          template_name: "page"
+          settings:
+            icon: "chart-line"
+            title: "Performance dashboard"
+            content: "<p>Shipped a dashboard showing page load times, error rates, and uptime trends. Available under Settings → Analytics for workspace admins.</p>"
+            status: completed
+            board: feature_request
+            pinned: false
+
+        - name: "Fix delayed email notifications"
+          slug: "fix-delayed-notifications"
+          template_name: "page"
+          settings:
+            icon: "bell"
+            title: "Fix delayed email notifications"
+            content: "<p>Some users report reply notifications arriving 30+ minutes late. Root cause identified in the queue worker; patch scheduled for the next maintenance window.</p>"
+            status: planned
+            board: bug
+            pinned: false
