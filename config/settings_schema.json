@@ -4,22 +4,21 @@
     "theme_name": "feedback",
     "theme_label": "t:theme_label",
     "theme_description": "t:theme_description",
-    "theme_version": "1.0.0",
+    "theme_version": "2.0.0",
     "theme_scope": "community",
     "theme_author": "Baklib",
-    "theme_documentation_url": "https://help.baklib.cn/themes/community/feedback",
-    "theme_support_url": "https://help.baklib.cn/themes/community/feedback",
+    "theme_documentation_url": "https://github.com/baklib-templates/feedback",
+    "theme_support_url": "https://github.com/baklib-templates/feedback",
     "theme_thumb_url": "images/theme/thumb.png",
     "theme_preview_images": [
-      "images/theme/index.png",
-      "images/theme/page.png",
-      "images/theme/post.png",
-      "images/theme/roadmap.png",
-      "images/theme/activity.png"
+      "images/theme/${lang}/cover.png",
+      "images/theme/${lang}/index.png",
+      "images/theme/${lang}/roadmap.png",
+      "images/theme/${lang}/page.png"
     ],
     "theme_languages": [
       {
-        "name": "Simplified Chinese",
+        "name": "简体中文",
         "value": "zh-CN"
       },
       {
@@ -61,32 +60,6 @@
             "--theme-color-success": "#29B52F",
             "--theme-color-warning": "#FFC107"
           }
-        }
-      },
-      "initial_pages": {
-        "default": {
-          "name": "Product Roadmap & Feedback",
-          "default": false,
-          "pages": [
-            {
-              "name": "Dark mode support",
-              "slug": "dark-mode",
-              "template": "page",
-              "settings": {
-                "content": "Please add a dark mode option to reduce eye strain during nighttime use.",
-                "pinned": false
-              }
-            },
-            {
-              "name": "Mobile experience improvements",
-              "slug": "mobile-experience",
-              "template": "page",
-              "settings": {
-                "content": "Some pages load slowly on mobile. Please improve responsive layout and interactions.",
-                "pinned": false
-              }
-            }
-          ]
         }
       }
     }

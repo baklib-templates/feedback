@@ -79,4 +79,19 @@ Use **Yarn** only (lockfile: `yarn.lock`).
 
 ## Preview images
 
-Theme preview thumbnails are referenced in `config/settings_schema.json` under `theme_preview_images` (upload to theme assets when publishing).
+Marketing assets for the template marketplace and official site live under `assets/images/theme/`:
+
+| Asset | Path | Size |
+|-------|------|------|
+| Template icon | `assets/images/theme/thumb.png` | 300×300 |
+| Poster cover (zh-CN) | `assets/images/theme/zh-CN/cover.png` | 16:9 (2560×1440) |
+| Poster cover (en) | `assets/images/theme/en/cover.png` | 16:9 (2560×1440) |
+| Homepage screenshot | `assets/images/theme/{lang}/index.png` | 16:9 |
+| Roadmap screenshot | `assets/images/theme/{lang}/roadmap.png` | 16:9 |
+| Detail page screenshot | `assets/images/theme/{lang}/page.png` | 16:9 |
+
+`{lang}` is `zh-CN` or `en`. Preview URLs in `config/settings_schema.json` (`theme_thumb_url`, `theme_preview_images`) use paths relative to `assets/` without the prefix (e.g. `images/theme/thumb.png`).
+
+Reference Demo screenshots (for prompt authoring): `assets/images/theme/screenshots/`.
+
+Prompt files used for AI generation: `data/theme-assets/prompts/` (local, gitignored under `data/`).

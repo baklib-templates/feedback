@@ -1,4 +1,29 @@
 {
+  "theme_label": "Feedback",
+  "theme_description": "A modern Baklib community portal for customer feedback: collect ideas and issues, voting, and a public roadmap—link changelogs and help docs, pair with knowledge base and AI search to reduce support load and close the loop on user requests.",
+  "form": {
+    "board_label": "Board",
+    "title_label": "Title"
+  },
+  "generic": {
+    "content": "Content",
+    "status_label": "Status",
+    "tags": "Tags"
+  },
+  "roadmap": {
+    "status": {
+      "inbox": "Inbox",
+      "planned": "Planned",
+      "in_progress": "In progress",
+      "completed": "Completed"
+    },
+    "board": {
+      "feature_request": "Feature request",
+      "bug": "Bug report",
+      "task": "Improvement",
+      "question": "Question"
+    }
+  },
   "settings_schema": {
     "generic": {
       "name": "General",

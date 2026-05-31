@@ -1,4 +1,29 @@
 {
+  "theme_label": "Feedback",
+  "theme_description": "客户反馈与产品动态门户，面向 Baklib 社区站点的现代客户反馈门户：集中收集建议与问题、投票排序与公开路线图，可关联更新日志与帮助文档，便于结合知识库与 AI 搜索降低支持成本，透明闭环用户诉求。",
+  "form": {
+    "board_label": "看板",
+    "title_label": "标题"
+  },
+  "generic": {
+    "content": "内容",
+    "status_label": "状态",
+    "tags": "标签"
+  },
+  "roadmap": {
+    "status": {
+      "inbox": "待处理",
+      "planned": "计划中",
+      "in_progress": "进行中",
+      "completed": "已完成"
+    },
+    "board": {
+      "feature_request": "功能需求",
+      "bug": "BUG 报告",
+      "task": "细节优化",
+      "question": "问题咨询"
+    }
+  },
   "settings_schema": {
     "generic": {
       "name": "通用设置",

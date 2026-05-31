@@ -89,7 +89,10 @@
               <ul class="space-y-2">
                 {% for post in my_posts %}
                   {% if forloop.index <= 3 %}
-                    {% assign post_status = post.settings.status | default: 'inbox' %}
+                    {% assign post_status = post.settings.status.value | default: post.settings.status | default: 'inbox' %}
+                    {% if post_status contains 't:' %}
+                      {% assign post_status = post_status | replace: 't:', '' | split: '.' | last %}
+                    {% endif %}
                     {% case post_status %}
                     {% when 'planned' %}{% assign status_dot_class = 'bg-info' %}
                     {% when 'in_progress' %}{% assign status_dot_class = 'bg-warning' %}
@@ -194,7 +197,7 @@
 {
 "name": "Index",
 "description": "Community Index Page Forum Theme",
-"thumb_url": "images/theme/index.png",
+"thumb_url": "images/theme/${lang}/index.png",
 "sub_page_templates": ["page", "roadmap"],
 "settings": [
 {

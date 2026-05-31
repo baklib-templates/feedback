@@ -1,13 +1,17 @@
 {% assign avatar_url = 'https://api.dicebear.com/7.x/rings/svg?seed=' | append: page.author.id %}
-{% assign page_status = page.settings.status | default: 'inbox' %}
-{% assign page_board = page.settings.board | default: 'feature_request' %}
+{% assign page_status = page.settings.status.value | default: page.settings.status | default: 'inbox' %}
+{% assign page_board = page.settings.board.value | default: page.settings.board | default: 'feature_request' %}
+{% if page_board contains 't:' %}
+  {% assign board_display = page_board | replace: 't:', '' | t %}
+{% else %}
 {% case page_board %}
 {% when 'feature_request' %}{% assign board_display = 'roadmap.board.feature_request' | t %}
 {% when 'bug' %}{% assign board_display = 'roadmap.board.bug' | t %}
 {% when 'task' %}{% assign board_display = 'roadmap.board.task' | t %}
 {% when 'question' %}{% assign board_display = 'roadmap.board.question' | t %}
-{% else %}{% assign board_display = page.settings.board %}
+{% else %}{% assign board_display = page_board %}
 {% endcase %}
+{% endif %}
 
 <article
   class="flex overflow-hidden rounded-2xl border border-base-300 bg-base-100 transition-colors hover:border-primary/30"

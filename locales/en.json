@@ -1,6 +1,6 @@
 {
-  "theme_label": "Product Roadmap & Feedback",
-  "theme_description": "An enterprise tool for publishing product roadmaps online and collecting user feedback. Share feature plans, track progress across roadmap stages, gather suggestions and votes, and prioritize what to build next.",
+  "theme_label": "Feedback",
+  "theme_description": "A modern Baklib community portal for customer feedback: collect ideas and issues, voting, and a public roadmap—link changelogs and help docs, pair with knowledge base and AI search to reduce support load and close the loop on user requests.",
   "nav": {
     "feedback": "Feedback",
     "roadmap": "Roadmap",

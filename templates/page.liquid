@@ -20,15 +20,24 @@
 {% when 'planned' %}{% assign status_display = 'roadmap.status.planned' | t %}
 {% when 'in_progress' %}{% assign status_display = 'roadmap.status.in_progress' | t %}
 {% when 'completed' %}{% assign status_display = 'roadmap.status.completed' | t %}
-{% else %}{% assign status_display = page.settings.status %}
+{% else %}
+  {% if page_status contains 't:' %}
+    {% assign status_display = page_status | replace: 't:', '' | t %}
+  {% else %}
+    {% assign status_display = page_status %}
+  {% endif %}
 {% endcase %}
+{% if page_board contains 't:' %}
+  {% assign board_display = page_board | replace: 't:', '' | t %}
+{% else %}
 {% case page_board %}
 {% when 'feature_request' %}{% assign board_display = 'roadmap.board.feature_request' | t %}
 {% when 'bug' %}{% assign board_display = 'roadmap.board.bug' | t %}
 {% when 'task' %}{% assign board_display = 'roadmap.board.task' | t %}
 {% when 'question' %}{% assign board_display = 'roadmap.board.question' | t %}
-{% else %}{% assign board_display = page.settings.board %}
+{% else %}{% assign board_display = page_board %}
 {% endcase %}
+{% endif %}
 
 <div class="relative z-50 mx-auto max-w-7xl px-4 sm:px-6 opacity-100 transition-transform ease-in-out transform scale-100 sm:my-10 sm:rounded-2xl">
   <div class="mb-10 sm:hidden">
@@ -258,7 +267,7 @@
 {
 "name": "Post page",
 "description": "Published page detail template",
-"thumb_url": "images/theme/page.png",
+"thumb_url": "images/theme/${lang}/page.png",
 "sub_page_templates": ["page"],
 "settings": [
 {

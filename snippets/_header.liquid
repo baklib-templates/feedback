@@ -145,12 +145,12 @@ updateNewReplyCount();
         {% endform_tag %}
       {% endif %}
     </div>
-    <div class="flex items-center px-4 mx-auto mt-2 space-x-2 max-w-7xl sm:px-6">
+    <div class="flex items-center px-4 mx-auto mt-8 md:mt-16 space-x-2 max-w-7xl sm:px-6">
       <a
         href="/"
         class="-mb-px flex items-center rounded-t-2xl border-b-0 px-2 sm:px-5 py-2 font-semibold {% if page.path == '/' %} border border-primary/20 bg-primary/10 text-primary shadow-sm {% else %} text-base-content/60 hover:text-base-content {% endif %}"
       >
-        {% render 'icon', name: 'message-square', class: 'mr-2 w-5 h-5' %}
+        {% render 'icon', name: 'message-circle', class: 'mr-2 w-5 h-5' %}
         {{ 'nav.feedback' | t }}
       </a>
       <a
