@@ -217,12 +217,7 @@
                 {% if page.author.id == current_user.member_hashid %}
                   {% render 'edit_form', page: page, page_icon_value: page_icon_value, page_status: page_status, page_board: page_board, status_display: status_display, board_display: board_display %}
                 {% else %}
-                <div class="col-span-2"><span class="font-medium text-base-content">{{ 'schema.lucide_icons.name' | t }}</span></div>
-                <div class="col-span-3">
-                  <div class="inline-flex items-center px-2 py-1 rounded-xl border border-base-300 bg-base-200/50">
-                    {% render 'page_icon', page: page, class: 'w-4 h-4 text-primary/70' %}
-                  </div>
-                </div>
+                
                 <div class="col-span-2"><span class="font-medium text-base-content">{{ 'generic.status_label' | t }}</span></div>
                 <div class="overflow-hidden col-span-3 p-1.5 -m-1.5">
                   <div class="flex items-center">

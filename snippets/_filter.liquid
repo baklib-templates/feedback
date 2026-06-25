@@ -132,6 +132,7 @@
     {% if current_user %}
       <a
         href="/s/new"
+        data-turbo-frame="_top"
         class="btn btn-primary btn-sm gap-2 rounded-full font-semibold shadow-none"
       >
         {% render 'icon', name: 'plus', class: 'w-4 h-4' %}
