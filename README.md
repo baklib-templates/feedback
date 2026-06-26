@@ -4,6 +4,16 @@ An enterprise-grade product roadmap and feedback collection theme for Baklib com
 
 Documentation: https://help.baklib.cn/themes/community/feedback
 
+---
+
+## Recent updates
+
+**2026-06-26**
+
+- **Comment moderation (independent from posts):** In theme settings you can choose publish-first or review-first for **replies**, separately from **posts**. Enabled by default: replies appear immediately after submission; when disabled, staff must approve replies before they show on the site.
+
+---
+
 ## Features
 
 - **Product roadmap** — Kanban-style Inbox, Planned, In Progress, and Completed columns
@@ -11,7 +21,7 @@ Documentation: https://help.baklib.cn/themes/community/feedback
 - **Voting** — Surface high-demand ideas through upvotes
 - **Filtering** — Organize by status, board, and tags
 - **Comments** — Threaded discussion on each post
-- **Moderation** — Optional publish-before-review or review-before-publish workflow
+- **Moderation** — Optional publish-before-review or review-before-publish workflow, separately for posts and replies
 
 ## Brand & theming
 

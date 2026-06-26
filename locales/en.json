@@ -188,6 +188,10 @@
           "label": "Publish before review",
           "info": "When enabled, submissions go live immediately; otherwise they require admin approval."
         },
+        "is_allow_reply_published": {
+          "label": "Publish replies before review",
+          "info": "Independent from post review. When enabled, replies appear immediately; when disabled, staff must approve replies first."
+        },
         "feedback_useful_type": {
           "label": "Default feedback emoji",
           "placeholder": "Copy from App settings → Feedback"

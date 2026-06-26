@@ -83,6 +83,13 @@
         "default": false
       },
       {
+        "id": "is_allow_reply_published",
+        "type": "checkbox",
+        "label": "t:settings_schema.generic.settings.is_allow_reply_published.label",
+        "info": "t:settings_schema.generic.settings.is_allow_reply_published.info",
+        "default": true
+      },
+      {
         "id": "feedback_useful_type",
         "type": "text",
         "label": "t:settings_schema.generic.settings.feedback_useful_type.label",

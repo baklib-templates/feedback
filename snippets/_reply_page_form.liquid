@@ -4,7 +4,7 @@
       {% form_tag 'reply' %}
         <input value="{{ target.full_slug }}" autocomplete="off" type="hidden" name="target_full_path">
         <input value="create_reply_success" autocomplete="off" type="hidden" name="return_template_name">
-        <input value="true" autocomplete="off" type="hidden" name="reply[published]">
+        <input value="{{ site.settings.is_allow_reply_published }}" autocomplete="off" type="hidden" name="reply[published]">
 
         <div class="relative p-1 mt-4 text-sm rounded-xl border border-base-300 shadow-sm transition-all bg-base-200/40 focus-within:border-primary focus-within:bg-base-100 focus-within:shadow-md">
           <textarea
