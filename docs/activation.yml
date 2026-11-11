@@ -1,0 +1,16 @@
+apply: site_pages
+page_template: page
+ask_path: -/search
+arrangements:
+  - key: original
+    title: 按反馈原来的目录
+    description: 网址和文件夹里反馈怎么分，站点页面就怎么分。
+    rule: original
+  - key: kanban
+    title: 每个顶层目录一块看板
+    description: 顶层目录各成一块看板，看板里是反馈页面。
+    rule: top_folder
+  - key: flat
+    title: 先平铺成一条条反馈
+    description: 先把反馈页面铺在首页下，稍后再分看板。
+    rule: flat

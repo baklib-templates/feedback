@@ -1,0 +1,81 @@
+skill:
+  version: 2
+  preset: feedback
+  writer: site_pages
+  summary: 真实反馈、投票、讨论和功能状态。
+  home:
+    template: index
+    hero_fields:
+    - description
+    slots: 0
+  navigation: {}
+  site_fields:
+  - logo_url
+  - feedback_useful_type
+  - copyright_info
+  - changelog_path
+  - lucide_icons
+  page_types:
+  - template: create_answer_reply_success_turbo_stream
+    role: create_answer_reply_success_turbo_stream
+    writable: []
+  - template: create_post_error_turbo_stream
+    role: create_post_error_turbo_stream
+    writable: []
+  - template: create_reply_success_notice_turbo_stream
+    role: create_reply_success_notice_turbo_stream
+    writable: []
+  - template: create_reply_success_turbo_stream
+    role: create_reply_success_turbo_stream
+    writable: []
+  - template: destroy_reply_success_turbo_stream
+    role: destroy_reply_success_turbo_stream
+    writable: []
+  - template: index
+    role: index
+    writable: []
+  - template: page
+    role: page
+    writable:
+    - icon
+    - title
+    - content
+    - tags
+    - pinned
+    - status
+    - board
+  - template: roadmap
+    role: roadmap
+    writable:
+    - title
+    - tags
+  - template: search
+    role: search
+    writable: []
+  - template: toast_error_turbo_stream
+    role: toast_error_turbo_stream
+    writable: []
+  - template: update_page_success_turbo_stream
+    role: update_page_success_turbo_stream
+    writable: []
+  limits:
+    channels: 20
+    pages: 100
+  industries: []
+  content_model:
+    hierarchy:
+    - page
+    body_field: content
+    default_access: public
+    source_of_truth: members
+    boundaries:
+    - 不伪造反馈作者、投票或回复
+  customization:
+    mode: organization_candidate
+    protected:
+    - content_model
+    - source_references
+    - permissions
+    - identity
+    - forms
+    - dam_references

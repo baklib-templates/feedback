@@ -1,6 +1,19 @@
 # Baklib Feedback Theme
 
-An enterprise-grade product roadmap and feedback collection theme for Baklib community sites. Publish your product plan, track progress across roadmap stages, gather user suggestions, and prioritize what to build next.
+English | [简体中文](README.zh-CN.md)
+
+This is a customer feedback and public roadmap site: each request is a page, and replies stay on that page. Use it for ideas, issues, voting, and a public roadmap. Do not use it for a knowledge base or a company website.
+
+The content model is documented in Chinese under `docs/`. Read that before the build notes below.
+
+| File | Read it to learn |
+| --- | --- |
+| [docs/README.md](docs/README.md) | Index of the docs |
+| [docs/overview.md](docs/overview.md) | What it is, and when to use it |
+| [docs/structure.md](docs/structure.md) | Home, sections, and pages |
+| [docs/schema.md](docs/schema.md) | Field ids, and which ones are writable |
+| [docs/usage.md](docs/usage.md) | How to set the site up |
+| [docs/activation.yml](docs/activation.yml) | Get-started arrangement recipe |
 
 Documentation: https://help.baklib.cn/themes/community/feedback
 
